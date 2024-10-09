@@ -13,7 +13,7 @@ async def webhook(request: Request):
 
     # 提取必要的信息
     username = data['pusher']['username']
-    email_suffix = "@redrock.team"
+    email_suffix = "@example.com"
     user_email = username + email_suffix
     ref = data['ref']
     branch = ref.split('/')[-1]
@@ -22,16 +22,16 @@ async def webhook(request: Request):
 
     url = "https://example.redrock.team/"
     sonar_user="admin"
-    sonar_pass="RedRockSRE@2024"
+    sonar_pass="password"
     sonarqube_data = getSonarqubeInfo(branch=branch, component=project, url=url,username=sonar_user,password=sonar_pass)
 
     project_url = f"{url}dashboard?id={project}&branch={branch}"
     msg = create_email_content(project_url, user_email, project, branch, sonarqube_data)
 
-    fromaddr = "sonarqube@redrock.team"
-    smtpserver = "smtp.feishu.cn"
+    fromaddr = "sonarqube@example.com"
+    smtpserver = "smtp.example.cn"
     subject = "代码质量检测"
-    password = "T96pzt0pFDyZ4P03"
+    password = "password"
     sendmail(subject, msg, [user_email], fromaddr, smtpserver, password)
 
     return PlainTextResponse("Webhook received and processed.")
