@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <title></title>
+         <meta charset="utf-8">
+     </head>
+     <body>
+     <div class="page" style="margin-left: 30px">
+         <h3>{user_mail}, 你好</h3>
+         <h3> 本次提交代码检查结果如下</h3>
+         <h3> 项目名称：{project} </h3>
+         <h3> 分支：{branch} </h3>
+         <h4>一、总体情况</h4>
+         <ul>
+             <li style="font-weight:bold;">
+                 本次扫描代码行数:   <span style="color:blue">{lines} </span>,
+                 bugs:  <span style="color:red">{bugs}</span>,
+                 Vulnerabilities:  <span style="color:red">{vulnerabilities}</span>,
+                 Code Smells:   <span style="color:red">{code_smells}</span>
+             </li>
+             <li style="font-weight:bold;margin-top: 10px;">
+                 URL地址： 
+                 <a style="font-weight:bold;"
+                    href={project_url}>{project_url}
+                 </a>
+             </li>
+         </ul>
+         <h4>二、信息详情</h4>
+         <ul>
+             <li style="font-weight:bold;">
+                综合等级:   {sqale_rating}
+             </li>
+             <li style="font-weight:bold;">
+                 各语言扫描行数:  {ncloc_language_distribution}
+             </li>
+             <li style="font-weight:bold;">
+                 代码重复率:  {duplicated_lines_density}
+             </li>
+             <li style="font-weight:bold;">
+                 安全等级:   {security_rating}
+             </li>
+             <li style="font-weight:bold;">
+                 可靠等级:   {reliability_rating}
+             </li>
+             <li style="font-weight:bold;">
+                 注释行密度:  {comment_lines_density}
+             </li>
+         </ul>
+     </div>
+     </body>
+     </html>
