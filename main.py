@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import PlainTextResponse
 from email_sender import sendmail
 from sonar import getSonarqubeInfo
-
+import os
 app = FastAPI()
 
 
@@ -13,25 +13,25 @@ async def webhook(request: Request):
 
     # 提取必要的信息
     username = data['pusher']['username']
-    email_suffix = "@example.com"
+    email_suffix = "@redrock.team"
     user_email = username + email_suffix
     ref = data['ref']
     branch = ref.split('/')[-1]
     project = data['repository']['name']  # 获取项目名
     print(project, branch, user_email)
 
-    url = "https://example.redrock.team/"
-    sonar_user="admin"
-    sonar_pass="password"
+    url = os.getenv("SONAR_URL")
+    sonar_user=os.getenv("SONAR_USER")
+    sonar_pass=os.getenv("SONAR_PASS")
     sonarqube_data = getSonarqubeInfo(branch=branch, component=project, url=url,username=sonar_user,password=sonar_pass)
 
     project_url = f"{url}dashboard?id={project}&branch={branch}"
     msg = create_email_content(project_url, user_email, project, branch, sonarqube_data)
 
-    fromaddr = "sonarqube@example.com"
-    smtpserver = "smtp.example.cn"
+    fromaddr = os.getenv("EMAIL_ADDR")
+    smtpserver = os.getenv("EMAIL_SERVER")
     subject = "代码质量检测"
-    password = "password"
+    password = os.getenv("EMAIL_SERVER_PASS")
     sendmail(subject, msg, [user_email], fromaddr, smtpserver, password)
 
     return PlainTextResponse("Webhook received and processed.")
