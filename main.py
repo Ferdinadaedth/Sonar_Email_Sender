@@ -27,7 +27,7 @@ async def webhook(request: Request):
     sonar_pass=os.getenv("SONAR_PASS")
     sonarqube_data = getSonarqubeInfo(branch=branch, component=project, url=url,username=sonar_user,password=sonar_pass)
 
-    project_url = f"{url}dashboard?id={project}&branch={branch}"
+    project_url = f"{url}/dashboard?id={project}&branch={branch}"
     msg = create_email_content(project_url, user_email, project, branch, sonarqube_data)
 
     fromaddr = os.getenv("EMAIL_ADDR")
