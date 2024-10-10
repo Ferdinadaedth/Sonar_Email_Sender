@@ -3,6 +3,8 @@ from fastapi.responses import PlainTextResponse
 from email_sender import sendmail
 from sonar import getSonarqubeInfo
 import os
+import time
+
 app = FastAPI()
 
 
@@ -32,6 +34,7 @@ async def webhook(request: Request):
     smtpserver = os.getenv("EMAIL_SERVER")
     subject = "代码质量检测"
     password = os.getenv("EMAIL_SERVER_PASS")
+    time.sleep(60)
     sendmail(subject, msg, [user_email], fromaddr, smtpserver, password)
 
     return PlainTextResponse("Webhook received and processed.")
