@@ -21,9 +21,9 @@
 | EMAIL_ADDR           | 邮件服务器地址 |
 | EMAIL_SERVER_PASS    | 邮件发送地址   |
 | EMAIL_SERVER         | 邮件服务器密码 |
-| SONAR_PASS sonarqube | 服务端登录密码 |
-| SONAR_URL sonarqube  | 服务端地址     |
-| SONAR_USER sonarqube | 服务端登录用户 |
+| SONAR_PASS  | sonarqube服务端登录密码 |
+| SONAR_URL   | sonarqube服务端地址     |
+| SONAR_USER  | sonarqube服务端登录用户 |
 
 
 ### 部署
