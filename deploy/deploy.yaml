@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonar-email-sender
+  namespace: sre-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonar-email-sender
+  template:
+    metadata:
+      labels:
+        app: sonar-email-sender
+    spec:
+      containers:
+      - name: sonar-email-sender
+        image: reg.redrock.team/sre/sonar_email_sender:1.3
+        ports:
+        - containerPort: 80
+        env:
+        - name: EMAIL_ADDR
+          valueFrom:
+            configMapKeyRef:
+              name: sonar-config
+              key: EMAIL_ADDR
+        - name: EMAIL_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: sonar-config
+              key: EMAIL_SERVER
+        - name: SONAR_URL
+          valueFrom:
+            configMapKeyRef:
+              name: sonar-config
+              key: SONAR_URL
+        - name: EMAIL_SERVER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: sonar-secret
+              key: EMAIL_SERVER_PASS
+        - name: SONAR_PASS
+          valueFrom:
+            secretKeyRef:
+              name: sonar-secret
+              key: SONAR_PASS
+        - name: SONAR_USER
+          valueFrom:
+            secretKeyRef:
+              name: sonar-secret
+              key: SONAR_USER
+

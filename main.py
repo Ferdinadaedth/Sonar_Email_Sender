@@ -25,6 +25,7 @@ async def webhook(request: Request):
     url = os.getenv("SONAR_URL")
     sonar_user=os.getenv("SONAR_USER")
     sonar_pass=os.getenv("SONAR_PASS")
+    time.sleep(60)
     sonarqube_data = getSonarqubeInfo(branch=branch, component=project, url=url,username=sonar_user,password=sonar_pass)
 
     project_url = f"{url}/dashboard?id={project}&branch={branch}"
@@ -34,7 +35,6 @@ async def webhook(request: Request):
     smtpserver = os.getenv("EMAIL_SERVER")
     subject = "代码质量检测"
     password = os.getenv("EMAIL_SERVER_PASS")
-    time.sleep(60)
     sendmail(subject, msg, [user_email], fromaddr, smtpserver, password)
 
     return PlainTextResponse("Webhook received and processed.")

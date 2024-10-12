@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonar-email-sender
+  namespace: sre-tools
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`sonar-email-sender.redrock.team`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: sonar-email-sender
+          port: 80

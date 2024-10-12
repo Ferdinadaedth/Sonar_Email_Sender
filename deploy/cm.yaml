@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sonar-config
+  namespace: sre-tools
+data:
+  EMAIL_ADDR: "sonarqube@example.com"
+  EMAIL_SERVER: "smtp.feishu.cn"
+  SONAR_URL: "https://sonarqube.example.com"
+
