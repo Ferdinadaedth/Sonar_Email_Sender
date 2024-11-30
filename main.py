@@ -14,7 +14,7 @@ async def webhook(request: Request):
     data = await request.json()
 
     # 提取必要的信息
-    username = data['pusher']['username']
+    username = data['pull_request']['user']['username']
     email_suffix = "@redrock.team"
     user_email = username + email_suffix
     ref = data['ref']
