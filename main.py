@@ -18,7 +18,7 @@ async def webhook(request: Request):
     email_suffix = "@redrock.team"
     user_email = username + email_suffix
     ref = data['ref']
-    branch = ref.split('/')[-1]
+    branch = os.getenv('BRANCH')
     project = data['repository']['name']  # 获取项目名
     print(project, branch, user_email)
 

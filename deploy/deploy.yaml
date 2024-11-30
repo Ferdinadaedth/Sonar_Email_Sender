@@ -34,6 +34,11 @@ spec:
             configMapKeyRef:
               name: sonar-config
               key: SONAR_URL
+        - name: BRANCH
+          valueFrom:
+            configMapKeyRef:
+              name: sonar-config
+              key: BRANCH
         - name: EMAIL_SERVER_PASS
           valueFrom:
             secretKeyRef:
